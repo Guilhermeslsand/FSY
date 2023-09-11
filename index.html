@@ -8,6 +8,10 @@
 
 <H1>Site da Companhia de Lara e Guilherme</H1>
 
+<H1>Contagem Regressiva:
+   <div id="contador" class="contador"></div>
+</H1>
+
 <HR>
 <b>Reuniões:</b> A Definir o Dia e a Hora <br>
 
@@ -15,11 +19,11 @@
 <HR>
 <H2>Planilha de designação das atividades</H2>
 <UL>
-<LI><P><A href="https://1drv.ms/x/s!AtWIj-tbEhbmglTIupd-LXStOBdm?e=Mtxo4F">Designações</A></P>
+<LI><P><A href="">Designações</A></P>
 </UL>
 
 <HR>
-<H2>Planilhas de Orçamento</H2>
+<H2>Detalhes dos dias do FSY</H2>
 <UL>
 <LI><P><A href="https://1drv.ms/x/s!AtWIj-tbEhbmgQe8bIcFRmCrn52m?e=8UWYfb&nav=MTVfe0VEQTBDMzI4LTIyQzYtNDVFMy04RTk1LTc2REQ0NEQ0MzE5MH0">Detalhes das Despesas</A></P>
 <LI><P><A href="https://1drv.ms/x/s!AtWIj-tbEhbmgQe8bIcFRmCrn52m?e=paYgwF&nav=MTVfezJFOUEzQTkyLTRDMUItNDM0MS05MDc3LUExNTc3NDU5ODEyMH0">Planilha do Orçamento da Ala</A></P>
@@ -71,6 +75,32 @@
    </ul>   
 </u>
    
+<script>
+// Defina a data-alvo (ano, mês (0-11), dia, hora, minuto, segundo)
+var dataAlvo = new Date(2023, 8, 30, 12, 0, 0); // Neste exemplo, a data é 30 de setembro de 2023, às 12:00.
+
+// Função para atualizar o contador regressivo
+function atualizarContador() {
+    var agora = new Date();
+    var diferenca = dataAlvo - agora;
+
+    var dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+    var horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
+    var segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
+
+    document.getElementById("contador").innerHTML = dias + "d " + horas + "h " + minutos + "m " + segundos + "s ";
+
+    if (diferenca < 0) {
+        document.getElementById("contador").innerHTML = "Contagem regressiva encerrada!";
+    }
+}
+
+// Atualize o contador a cada segundo
+setInterval(atualizarContador, 1000);
+</script>
+
    
 </BODY>
 </HTML>
+
