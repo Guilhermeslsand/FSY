@@ -5,3 +5,9 @@
     top: 100px;
     left: 100px;
 }
+
+.contador {
+    font-size: 24px; /* Tamanho da fonte */
+    color: #FF5733; /* Cor do texto (neste caso, um tom de laranja) */
+    font-weight: bold; /* Negrito *
+}
