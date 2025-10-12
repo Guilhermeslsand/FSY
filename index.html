@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Companhia Melissa e Guilherme</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Arial", sans-serif;
+      background-color: #f7f9fc;
+      color: #333;
+      height: auto;
+      overflow-y: auto;
+    }
+
+    /* HEADER */
+    header {
+      position: relative;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #763be4;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 15px 0;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      min-height: 50vh;
+    }
+
+    header h1 {
+      margin: 5px 0;
+      font-size: 1.6rem;
+    }
+
+    #countdown {
+      font-weight: bold;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 8px 20px;
+      border-radius: 20px;
+      margin-top: 5px;
+    }
+
+    /* CONTEÚDO */
+    main {
+      margin-top: 130px; /* espaço pro header fixo */
+      padding: 20px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    section {
+      margin-bottom: 40px;
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #763be4;
+      margin-bottom: 15px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul li {
+      margin: 10px 0;
+    }
+
+    a {
+      text-decoration: none;
+      color: #763be4;
+      font-weight: 600;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Companhia Melissa e Guilherme</h1>
+    <h3>Próxima Reunião: 17/10/2025 às 20:30</h3>
+    <div class="contador-container">
+      <span class="label">⏳ Faltam</span>
+      <span id="countdown">Carregando...</span>
+      <span class="label">— Até o FSY</span>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <h2>Recursos Extras</h2>
+      <ul>
+        <li><a href="materiais/Manual do Participante FSY 2025.pdf" target="_blank">Manual do jovem de 2025</a></li>
+        <li><a href="materiais/Manual da Equipe FSY 2025.pdf" target="_blank">Manual do consultor de 2025</a></li>
+      </ul>
+    </section>
+    <section>
+      <h2>Dia 1 - FSY</h2>
+      <ul>
+        <li><a href="..." target="_blank">Planejamento Conheça sua companhia (Em breve)</a></li>
+        <li><a href="..." target="_blank">Roteiro de conheço seu consultor (Em breve)</a></li>
+        <li><a href="..." target="_blank">Brincadeiras da noite familiar(Em breve)</a></li>
+        <li><a href="materiais/DIA 01 - FSY 2026.pdf" target="_blank">Manual 1º dia</a></li>
+        <li><a href="https://drive.google.com/file/d/1jqDZbbHdY2NZTw9qTdGFdqkBtjs-CGnA/view?usp=drive_link" target="_blank">Video Conheça seu consultor</a></li>
+        <li><a href="https://drive.google.com/file/d/1DEJefD-G7lt_3nDP7SikKFVeZkXgSBqu/view?usp=drive_link" target="_blank">Video Conheça sua companhia</a></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Dia 2 - FSY</h2>
+      <ul>
+        <!-- li><a href="materiais/ata-dia2.pdf" target="_blank">Ata do dia 2</a></li -->
+       
+      </ul>
+    </section>
+
+    <!-- Você pode repetir as seções para os dias 3, 4 e 5 -->
+  </main>
+
+  <script>
+    // Data do evento (exemplo: 15 de novembro de 2025 às 08:00)
+    const targetDate = new Date("Feb 14, 2026 08:00:00").getTime();
+
+    const timer = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance <= 0) {
+        document.getElementById("countdown").innerHTML = "🎉 O retiro começou!";
+        clearInterval(timer);
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("countdown").innerHTML =
+        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }, 1000);
+  </script>
+</body>
+</html>
