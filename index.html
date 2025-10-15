@@ -5,86 +5,314 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Companhia Sister Barbosa e Guilherme</title>
   <style>
-    body {
-      margin: 0;
-      font-family: "Arial", sans-serif;
-      background-color: #f7f9fc;
-      color: #333;
-      height: auto;
-      overflow-y: auto;
-    }
+    /* Importando a fonte Inter */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 
-    /* HEADER */
-    header {
-      position: relative;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background-color: #763be4;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 15px 0;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-      z-index: 1000;
-      min-height: 50vh;
-    }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    header h1 {
-      margin: 5px 0;
-      font-size: 1.6rem;
-    }
+:root {
+  /* Variáveis para cores e valores reutilizáveis */
+  --primary-color-start: #667eea;
+  --primary-color-end: #764ba2;
+  --text-color: #1a202c;
+  --accent-color: #ffffff;
+  --background-fade: rgba(255, 255, 255, 0.1);
+  --shadow-color: rgba(0, 0, 0, 0.3);
+}
 
-    #countdown {
-      font-weight: bold;
-      background: rgba(255, 255, 255, 0.2);
-      padding: 8px 20px;
-      border-radius: 20px;
-      margin-top: 5px;
-    }
+body {
+  font-family: "Inter", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(135deg, var(--primary-color-start) 0%, var(--primary-color-end) 100%);
+  color: var(--text-color);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
 
-    /* CONTEÚDO */
-    main {
-      margin-top: 130px; /* espaço pro header fixo */
-      padding: 20px;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-    }
+/* Efeito de partículas no fundo, simplificado para melhor performance */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 50%, var(--background-fade) 0%, transparent 60%),
+    radial-gradient(circle at 80% 80%, var(--background-fade) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 1;
+}
 
-    section {
-      margin-bottom: 40px;
-      background: white;
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
+/* HEADER */
+header {
+  position: top;
+  width: 100%;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.95) 0%, rgba(118, 75, 162, 0.95) 100%);
+  backdrop-filter: blur(10px);
+  color: var(--accent-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  box-shadow: 0 10px 40px var(--shadow-color);
+  z-index: 1000;
+  min-height: 40vh; /* Reduzido para evitar sobreposição excessiva */
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
 
-    h2 {
-      color: #763be4;
-      margin-bottom: 15px;
-    }
+/* Efeito de brilho animado no header */
+header::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+  transform: rotate(45deg);
+  animation: shine 4s infinite linear; /* Ajustado para ser mais suave */
+}
 
-    ul {
-      list-style: none;
-      padding: 0;
-    }
+@keyframes shine {
+  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
 
-    ul li {
-      margin: 10px 0;
-    }
+header h1 {
+  margin: 10px 0;
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  z-index: 2;
+  text-shadow: 0 2px 20px var(--shadow-color);
+  letter-spacing: -0.5px;
+  
+}
 
-    a {
-      text-decoration: none;
-      color: #763be4;
-      font-weight: 600;
-    }
+#countdown {
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  padding: 12px 32px;
+  border-radius: 50px;
+  margin-top: 40px;
+  margin-left: -220px;
+  font-size: 1.1rem;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px var(--shadow-color);
+  z-index: 2;
+  position: absolute;
+  transition: all 0.3s ease;
+  outline: none; /* Para acessibilidade */
+}
 
-    a:hover {
-      text-decoration: underline;
-    }
+#countdown:focus, #countdown:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px var(--shadow-color);
+  outline: 2px solid var(--accent-color);
+}
+
+/* CONTEÚDO */
+main {
+  position: relative;
+  margin-top: -30px; /* Ajuste menor para overlap elegante */
+  padding: 0 20px 60px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 10;
+}
+
+section {
+  margin-bottom: 30px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  padding: 32px;
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  animation: fadeInUp 0.6s ease forwards;
+  opacity: 0;
+}
+
+section:nth-child(1) { animation-delay: 0.1s; }
+section:nth-child(2) { animation-delay: 0.2s; }
+section:nth-child(3) { animation-delay: 0.3s; }
+section:nth-child(4) { animation-delay: 0.4s; }
+
+section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+  color: var(--primary-color-start);
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  position: relative;
+  padding-bottom: 12px;
+}
+
+h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color-start), var(--primary-color-end));
+  border-radius: 2px;
+}
+
+ul li {
+  margin: 16px 0;
+  padding-left: 28px;
+  position: relative;
+  line-height: 1.6;
+  transition: all 0.2s ease;
+}
+
+ul li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--primary-color-start);
+  font-weight: bold;
+  font-size: 1.2rem;
+  transition: all 0.2s ease;
+}
+
+ul li:hover {
+  padding-left: 35px;
+}
+
+ul li:hover::before {
+  left: 7px;
+}
+
+a {
+  text-decoration: none;
+  color: var(--primary-color-start);
+  font-weight: 600;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary-color-start), var(--primary-color-end));
+  transition: width 0.3s ease;
+}
+
+a:hover, a:focus {
+  color: var(--primary-color-end);
+  outline: 2px solid var(--primary-color-start); /* Acessibilidade */
+}
+
+a:hover::after {
+  width: 100%;
+}
+
+/* Estilos para botão */
+.btn-primary {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--primary-color-start) 0%, var(--primary-color-end) 100%);
+  color: var(--accent-color) !important;
+  padding: 14px 32px;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+  outline: 2px solid var(--accent-color);
+}
+
+/* Animação de entrada */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsividade aprimorada */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 1.8rem;
+  }
+
+  #countdown {
+    font-size: 1rem;
+    padding: 10px 24px;
+    position: absolute;
+  }
+
+  section {
+    padding: 24px;
+    border-radius: 16px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  ul li {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    padding: 40px 10px;
+    min-height: 30vh; /* Mais compacto para mobile */
+  }
+
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  main {
+    padding: 0 10px 40px;
+  }
+
+  section {
+    padding: 20px;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  ul li {
+    font-size: 0.9rem;
+    margin: 12px 0;
+  }
+}
 
   </style>
 </head>
@@ -93,9 +321,8 @@
     <h1>Companhia Sister Barbosa e Guilherme</h1>
     <h3>Próxima Reunião: 17/10/2025 às 20:30</h3>
     <div class="contador-container">
-      <span class="label">⏳ Faltam</span>
+      <span class="label">Contagem regressiva para o fsy</span>
       <span id="countdown">Carregando...</span>
-      <span class="label">— Até o FSY</span>
     </div>
   </header>
 
@@ -110,20 +337,27 @@
     <section>
       <h2>Dia 1 - FSY</h2>
       <ul>
-        <li><a href="..." target="_blank">Planejamento Conheça sua companhia (Em breve)</a></li>
-        <li><a href="..." target="_blank">Roteiro de conheço seu consultor (Em breve)</a></li>
+        <li><a href="https://docs.google.com/document/d/1keAGZTf5JxqpueBx3XbdDf5gIn1ji4iwYkod64pzlSQ/edit?tab=t.0" target="_blank">Planejamento Conheça sua companhia</a></li>
+        <li><a href="https://docs.google.com/document/d/13lqS9_dVO2ru64SGEEbU4eDHnbUf_dUo6nDWocj1u1E/edit?usp=sharing" target="_blank">Roteiro de conheço seu consultor</a></li>
         <li><a href="..." target="_blank">Brincadeiras da noite familiar(Em breve)</a></li>
-        <li><a href="materiais/DIA 01 - FSY 2026.pdf" target="_blank">Manual 1º dia</a></li>
+        <li><a href="materiais/Dia 1/DIA 01 - FSY 2026.pdf" target="_blank">Manual 1º dia</a></li>
         <li><a href="https://drive.google.com/file/d/1jqDZbbHdY2NZTw9qTdGFdqkBtjs-CGnA/view?usp=drive_link" target="_blank">Video Conheça seu consultor</a></li>
         <li><a href="https://drive.google.com/file/d/1DEJefD-G7lt_3nDP7SikKFVeZkXgSBqu/view?usp=drive_link" target="_blank">Video Conheça sua companhia</a></li>
+        <li><a href="https://drive.google.com/file/d/1eFGLHnBT9aULC-3OmbQ5MX7HaBtVb5g0/view?usp=drive_link" target="_blank">Video 2 Conheça sua companhia</a></li>
+        <li><a href="https://drive.google.com/file/d/1C8KLNvBjPaj4-MIJKX9OO2rkYocwzmA6/view?usp=drive_link" target="_blank">Explicação conheça seu consultor</a></li>
+        <li><a href="https://drive.google.com/file/d/1nnePeoVM-WizxQDQ-SLDBh1BwzROPkiS/view?usp=drive_link" target="_blank">Prática conheça seu consultor</a></li>
+        <li><a href="https://drive.google.com/file/d/14DPGl9tN7COqV-_YFM8K17_MHV_InyMR/view?usp=drive_link" target="_blank">Explicação conheça sua companhia</a></li>
+        <li><a href="https://drive.google.com/file/d/1WxJLpznVOor9or9vcla_whtJnGExfpo6/view?usp=drive_link" target="_blank">Prática Elaborar metas</a></li>
+        <li><a href="https://drive.google.com/file/d/1FJtcrxH9yBE-Vq_pK1X5sqiCsemSKWQ-/view?usp=drive_link" target="_blank">Refletir e analisar</a></li>
+
       </ul>
     </section>
 
     <section>
       <h2>Dia 2 - FSY</h2>
       <ul>
-        <!-- li><a href="materiais/ata-dia2.pdf" target="_blank">Ata do dia 2</a></li -->
-       
+        <li><a href="materiais/Dia 2/Dia 02 - FSY 2026 revisão final.pdf" target="_blank">Manual 2º dia</a></li>
+        <li><a href="https://drive.google.com/drive/folders/1KLSS_QUxv7cAbWP78ONxU94BkBolXVD0?usp=drive_link" target="_blank">Estudo do evangelho</a></li>
       </ul>
     </section>
 
